@@ -83,7 +83,95 @@ public class TicTakToeTest {
         game.makeMove(1, 0);
         game.makeMove(1, 2);
         GameStatus status = game.makeMove(2, 1);
-        assertEquals(status,GameStatus.DRAW);
+        assertEquals(status, GameStatus.DRAW);
+    }
+    @Test
+    public void testGameStatusTillPlayer1WinningHorizontally() throws InvalidMoveException, InvalidPositionException {
+        GameStatus status;
+        status = game.makeMove(0, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(0, 1);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 1);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(0, 2);
+        assertEquals(status, GameStatus.WIN_PL1);
+    }
+    @Test
+    public void testGameStatusTillPlayer2WinningHorizontally() throws InvalidMoveException, InvalidPositionException {
+        GameStatus status;
+        status = game.makeMove(0, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(2, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 1);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(0, 2);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 2);
+        assertEquals(status, GameStatus.WIN_PL2);
+    }
+    @Test
+    public void testGameStatusTillPlayer1WinningVertically() throws InvalidMoveException, InvalidPositionException {
+        GameStatus status;
+        status = game.makeMove(0, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 1);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 2);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(2, 0);
+        assertEquals(status, GameStatus.WIN_PL1);
+    }
+    @Test
+    public void testGameStatusTillPlayer2WinningVertically() throws InvalidMoveException, InvalidPositionException {
+        GameStatus status;
+        status = game.makeMove(1, 1);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(0, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 2);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(2, 2);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(2, 0);
+        assertEquals(status, GameStatus.WIN_PL2);
+    }
+    @Test
+    public void testGameStatusTillPlayer1WinAlongSecondaryDiagonal() throws InvalidMoveException, InvalidPositionException {
+        GameStatus status;
+        status = game.makeMove(0, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 1);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(2, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(2, 2);
+        assertEquals(status, GameStatus.WIN_PL1);
+    }
+    @Test
+    public void testGameStatusTillPlayer1WinAlongPrimaryDiagonal() throws InvalidMoveException, InvalidPositionException {
+        GameStatus status;
+        status = game.makeMove(0, 2);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 0);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(1, 1);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(2, 2);
+        assertEquals(status, GameStatus.CONTINUE);
+        status = game.makeMove(2, 0);
+        assertEquals(status, GameStatus.WIN_PL1);
     }
 }
 

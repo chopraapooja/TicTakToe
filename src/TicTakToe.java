@@ -42,11 +42,16 @@ public class TicTakToe {
     public GameStatus makeMove(int row, int col) throws InvalidPositionException, InvalidMoveException {
         if(!isValidPosition(row,col)) throw new InvalidPositionException();
         if(!isValidMove(row, col)) throw new InvalidMoveException();
+        updateGrid(row, col);
+        noOfTurnsDone++;
+        GameStatus status = getStatus();
+        changeTurn();
+        return status;
+    }
+
+    private void updateGrid(int row, int col) {
         if(turn == 1) grid[row][col] = 'X';
         else grid[row][col] = 'O';
-        noOfTurnsDone++;
-        changeTurn();
-        return getStatus();
     }
 
     private void changeTurn() {
@@ -72,14 +77,65 @@ public class TicTakToe {
     }
 
     private GameStatus getStatus() {
-        if(isDraw()) return GameStatus.DRAW;
-//        boolean status1 = verticalCheck();
-//        boolean status2 = horizontalCheck();
-//        boolean status3 = diagonalCheck();
-//        if(status1||status2||status3) {
-//
-//        }
+        if(isDraw())
+            return GameStatus.DRAW;
+        if(horizontalCheck())
+            return findWinner();
+        if(verticalCheck())
+            return findWinner();
+        if(diagonalCheck())
+            return findWinner();
         return GameStatus.CONTINUE;
+    }
+
+    private boolean diagonalCheck() {
+        if(isSymmetric(findFirstDiagonal()))return true;
+        if(isSymmetric(findSecondDiagonal())) return true;
+        return false;
+    }
+
+    private char[] findSecondDiagonal() {
+        char[] tempDiagonal = new char[3];
+        for (int position = 0; position < rowSize; position++)
+            tempDiagonal[position] = grid[position][rowSize-position-1];
+        return tempDiagonal;
+    }
+
+    private char[] findFirstDiagonal() {
+        char[] tempDiagonal = new char[3];
+        for (int position = 0; position < rowSize; position++)
+            tempDiagonal[position] = grid[position][position];
+        return tempDiagonal;
+    }
+
+    private GameStatus findWinner() {
+        return (turn == 1) ? GameStatus.WIN_PL1 : GameStatus.WIN_PL2;
+    }
+
+    private boolean verticalCheck() {
+        char[] tempCol = new char[colSize];
+        for (int col = 0; col < colSize; col++) {
+            for (int row = 0; row < rowSize; row++)
+                tempCol[row] = grid[row][col];
+            if(isSymmetric(tempCol)) return true;
+        }
+        return false;
+    }
+
+    private boolean horizontalCheck() {
+        for (int row = 0; row < rowSize; row++) {
+            if(isSymmetric(grid[row])) return true;
+        }
+        return false;
+    }
+
+    private boolean isSymmetric(char[] row) {
+        char firstEle = row[0];
+        for (int i = 1; i < row.length; i++) {
+            boolean doesSymtericityBroken = (row[i] != firstEle || row[i] == '*');
+            if(doesSymtericityBroken) return false;
+        }
+        return true;
     }
 
     public boolean isDraw() {
