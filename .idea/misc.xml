@@ -14,7 +14,8 @@
     <option name="clearLogConsole" value="true" />
     <option name="autoShowErrorsInEditorAfterCompile" value="true" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+  <component name="IdProvider" IDEtalkID="F04F7EC05114522690FEFF624268C5EC" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
